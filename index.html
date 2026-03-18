@@ -1,151 +1,1224 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <title>Carta Estilizada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feliz aniversário, Amanda, Meu amor</title>
     <style>
-      body {
-        background: #f2f2f2;
-        min-height: 100vh;
+      :root {
+        --bg-1: #120814;
+        --bg-2: #1d0f24;
+        --bg-3: #2d1632;
+        --panel: rgba(34, 16, 35, 0.68);
+        --panel-strong: rgba(20, 8, 24, 0.84);
+        --line: rgba(255, 255, 255, 0.11);
+        --text: #fff5fb;
+        --muted: #e3cfe1;
+        --accent: #ff77b7;
+        --accent-2: #ffc76d;
+        --accent-3: #c79bff;
+        --success: #7df4c8;
+        --danger: #ff8fa3;
+        --shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+        --radius-xl: 30px;
+        --radius-lg: 22px;
+        --radius-md: 16px;
+        --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      * {
+        box-sizing: border-box;
         margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        overflow: hidden;
+        color: var(--text);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background:
+          radial-gradient(
+            circle at 15% 15%,
+            rgba(255, 119, 183, 0.25),
+            transparent 24%
+          ),
+          radial-gradient(
+            circle at 85% 12%,
+            rgba(255, 199, 109, 0.16),
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 50% 100%,
+            rgba(199, 155, 255, 0.16),
+            transparent 34%
+          ),
+          linear-gradient(145deg, var(--bg-1), var(--bg-2) 48%, var(--bg-3));
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .grid,
+      .noise,
+      #particles {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .grid {
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 52px 52px;
+        mask-image: radial-gradient(
+          circle at center,
+          black 42%,
+          transparent 92%
+        );
+        opacity: 0.55;
+      }
+
+      .noise {
+        opacity: 0.05;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" stitchTiles="stitch"/></filter><rect width="160" height="160" filter="url(%23n)" opacity="1"/></svg>');
+        mix-blend-mode: soft-light;
+      }
+
+      .app {
+        position: relative;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 28px;
+      }
+
+      .login-view,
+      .video-view {
+        position: relative;
+        width: min(1160px, 100%);
+        transition:
+          opacity 0.7s var(--ease),
+          transform 0.7s var(--ease),
+          filter 0.7s var(--ease);
+      }
+
+      .hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(28px) scale(0.985);
+        filter: blur(10px);
+        position: absolute;
+        inset: auto;
+      }
+
+      .card {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--line);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.09),
+          rgba(255, 255, 255, 0.03)
+        );
+        backdrop-filter: blur(22px) saturate(140%);
+        -webkit-backdrop-filter: blur(22px) saturate(140%);
+        box-shadow: var(--shadow);
+      }
+
+      .shell {
+        display: grid;
+        grid-template-columns: 1.12fr 0.88fr;
+        min-height: 700px;
+      }
+
+      .hero {
+        position: relative;
+        padding: 48px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-right: 1px solid rgba(255, 255, 255, 0.06);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 52%),
+          radial-gradient(
+            circle at 18% 15%,
+            rgba(255, 119, 183, 0.22),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 80% 18%,
+            rgba(255, 199, 109, 0.14),
+            transparent 20%
+          ),
+          linear-gradient(160deg, rgba(14, 6, 18, 0.45), rgba(8, 4, 12, 0.2));
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+
+      .logo {
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        border-radius: 18px;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #fff;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 119, 183, 1),
+          rgba(199, 155, 255, 0.96) 58%,
+          rgba(255, 199, 109, 0.96)
+        );
+        box-shadow:
+          0 16px 38px rgba(255, 119, 183, 0.22),
+          inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      }
+
+      .brand-copy small {
+        display: block;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 0.72rem;
+        margin-bottom: 4px;
+      }
+
+      .brand-copy strong {
+        font-size: 1.08rem;
+        letter-spacing: 0.01em;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        width: fit-content;
+        padding: 10px 14px;
+        margin-bottom: 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        color: #ffeaf5;
+        font-size: 0.84rem;
+      }
+
+      .spark {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 0 0 0 rgba(255, 119, 183, 0.5);
+        animation: pulse 1.8s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 119, 183, 0.45);
+        }
+        70% {
+          box-shadow: 0 0 0 14px rgba(255, 119, 183, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 119, 183, 0);
+        }
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        line-height: 0.96;
+        letter-spacing: -0.045em;
+        max-width: 740px;
+      }
+
+      .hero p {
+        margin-top: 20px;
+        color: var(--muted);
+        line-height: 1.75;
+        max-width: 600px;
+        font-size: 1rem;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 26px;
+      }
+
+      .chip {
+        padding: 11px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.04);
+        color: #ffeaf7;
+        font-size: 0.9rem;
+      }
+
+      .hero-bottom {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 36px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .hero-line {
+        width: 68px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.65),
+          transparent
+        );
+      }
+
+      .panel {
+        padding: 48px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(
+          180deg,
+          rgba(10, 4, 14, 0.24),
+          rgba(10, 4, 14, 0.48)
+        );
       }
-      .carta {
-        background: #fffbea;
-        border: 2px solid #e2c275;
-        border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        padding: 40px 32px;
-        max-width: 400px;
-        text-align: center;
+
+      .panel-box {
+        width: min(430px, 100%);
+      }
+
+      .panel-box h2 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        letter-spacing: -0.03em;
+      }
+
+      .panel-box p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin-bottom: 22px;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      .field label {
+        display: block;
+        margin-bottom: 10px;
+        color: #ffe6f2;
+        font-size: 0.92rem;
+      }
+
+      .input-wrap {
         position: relative;
       }
-      .carta::before {
+
+      .input-wrap input {
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        color: #fff;
+        border-radius: 18px;
+        padding: 18px 56px 18px 18px;
+        outline: none;
+        transition:
+          border-color 0.2s ease,
+          background 0.2s ease,
+          box-shadow 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .input-wrap input::placeholder {
+        color: #c4a8be;
+      }
+
+      .input-wrap input:focus {
+        border-color: rgba(255, 119, 183, 0.72);
+        background: rgba(255, 255, 255, 0.07);
+        box-shadow: 0 0 0 4px rgba(255, 119, 183, 0.12);
+        transform: translateY(-1px);
+      }
+
+      .peek {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        background: rgba(255, 255, 255, 0.07);
+        color: #fff;
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .peek:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(-50%) scale(1.03);
+      }
+
+      .hint {
+        margin-top: 12px;
+        color: #dcb8ca;
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .btn {
+        border: 0;
+        cursor: pointer;
+        border-radius: 18px;
+        padding: 16px 18px;
+        font-weight: 700;
+        transition:
+          transform 0.22s ease,
+          filter 0.22s ease,
+          background 0.22s ease;
+      }
+
+      .btn:active {
+        transform: translateY(1px) scale(0.995);
+      }
+
+      .btn-primary {
+        flex: 1;
+        color: #230915;
+        background: linear-gradient(135deg, #ffe1ef, #ffb8da 55%, #ffd78b);
+        box-shadow: 0 18px 36px rgba(255, 119, 183, 0.18);
+      }
+
+      .btn-primary:hover {
+        filter: brightness(1.03);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        color: white;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .status-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 16px;
+        min-height: 24px;
+      }
+
+      .status {
+        color: var(--muted);
+        font-size: 0.92rem;
+        transition: color 0.25s ease;
+      }
+
+      .status.error {
+        color: var(--danger);
+      }
+      .status.success {
+        color: var(--success);
+      }
+
+      .mini-note {
+        color: #d7bdd0;
+        font-size: 0.84rem;
+      }
+
+      .shake {
+        animation: shake 0.36s linear;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20% {
+          transform: translateX(-7px);
+        }
+        40% {
+          transform: translateX(7px);
+        }
+        60% {
+          transform: translateX(-5px);
+        }
+        80% {
+          transform: translateX(5px);
+        }
+      }
+
+      .fade-up {
+        animation: fadeUp 0.9s var(--ease);
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(22px) scale(0.985);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .video-shell {
+        display: grid;
+        gap: 18px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 18px 22px;
+      }
+
+      .topbar h3 {
+        font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+        letter-spacing: -0.03em;
+        margin-bottom: 6px;
+      }
+
+      .topbar p {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .controls {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .video-frame {
+        position: relative;
+        overflow: hidden;
+        border-radius: calc(var(--radius-xl) + 4px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(0, 0, 0, 0.4);
+        box-shadow: var(--shadow);
+        isolation: isolate;
+      }
+
+      .video-frame iframe {
+        position: relative;
+        z-index: 2;
+        display: block;
+        width: 100%;
+        height: min(76vh, 780px);
+        border: 0;
+        background: #000;
+      }
+
+      .video-frame::before {
         content: "";
         position: absolute;
-        top: -24px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 40px;
-        background: #e2c275;
-        border-radius: 0 0 30px 30px;
+        inset: -20%;
+        background:
+          radial-gradient(
+            circle at 18% 18%,
+            rgba(255, 119, 183, 0.24),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 83% 18%,
+            rgba(255, 199, 109, 0.16),
+            transparent 22%
+          ),
+          radial-gradient(
+            circle at 50% 120%,
+            rgba(199, 155, 255, 0.16),
+            transparent 34%
+          );
+        filter: blur(42px);
         z-index: 0;
-        opacity: 0.3;
       }
-      .carta h1 {
-        font-size: 2rem;
-        margin-bottom: 16px;
-        color: #b48a3e;
-        font-family: "Brush Script MT", cursive;
+
+      .video-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(8, 4, 12, 0.1),
+          rgba(8, 4, 12, 0.25)
+        );
+        pointer-events: none;
+        z-index: 1;
       }
-      .carta p {
-        font-size: 1.1rem;
-        color: #5a4a1d;
-        margin-bottom: 0;
+
+      video {
+        position: relative;
+        z-index: 2;
+        display: block;
+        width: 100%;
+        height: min(76vh, 780px);
+        background: #000;
+        object-fit: contain;
+      }
+
+      .corner-badge {
+        position: absolute;
+        z-index: 3;
+        top: 18px;
+        left: 18px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(23, 8, 20, 0.55);
+        backdrop-filter: blur(18px);
+        color: #ffeaf7;
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .message-card {
+        padding: 20px 22px;
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .message-card p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .footer-note {
+        text-align: center;
+        color: #dfc4d6;
+        font-size: 0.86rem;
+      }
+
+      @media (max-width: 980px) {
+        .app {
+          padding: 20px;
+        }
+
+        .shell {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+
+        .hero {
+          padding: 34px 26px 24px;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .panel {
+          padding: 30px 24px 34px;
+        }
+
+        .topbar,
+        .message-card {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        video {
+          height: min(58vh, 520px);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .panel-box h2 {
+          font-size: 1.55rem;
+        }
+
+        .hero,
+        .panel {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .actions {
+          flex-direction: column;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="carta">
-      <h1>Para você (sim, "você", pq só existe você como amor da minha vida e vai ser assim até o "e eles viveram felizes pra sempre", clichê? talvez, caralho escrevi demais aq)<br>eita</h1>
-      <p>
-        90 dias, 2160 horas, 129.600 minutos, 7.776.000 segundos.
+    <canvas id="particles"></canvas>
+    <div class="grid"></div>
+    <div class="noise"></div>
 
-        <br /><br />
+    <main class="app">
+      <section id="loginView" class="login-view fade-up">
+        <div class="card shell" id="loginCard">
+          <div class="hero">
+            <div>
+              <div class="brand">
+                <div class="logo" id="logoText">A♥</div>
+                <div class="brand-copy">
+                  <small>Birthday Access</small>
+                  <strong id="brandName">Feliz aniversário, Amanda</strong>
+                </div>
+              </div>
 
-        Esse é o tempo que eu carrego dentro de mim, e que jogo na sua cara
-        todos os dias de um jeito ou de outro: eu amo você. Às vezes eu pareço
-        meio besta? Provavelmente. Mas eu não ligo, porque eu amo amar você.
-        Caramba, eu nem tenho palavras pra descrever o quanto você mexe comigo.
-        Literalmente, tudo o que eu faço não ocupa espaço suficiente na minha
-        cabeça quando se trata de você. Quando eu falo que você não saiu da
-        minha mente em nenhum momento, é real.
+              <div class="eyebrow">
+                <span class="spark"></span>
+                <span id="eyebrowText"
+                  >Um presente escondido para uma data especial</span
+                >
+              </div>
 
-        <br /><br />
+              <h1 id="heroTitle">Uma surpresa feita para o teu aniversário.</h1>
+              <p id="heroSubtitle">
+                Antes do vídeo aparecer, tem uma lembrança especial guardando a
+                entrada: o horário do primeiro “eu te amo”.
+              </p>
 
-        Às vezes fico até ansioso pra te mandar mensagem, porque sei que você
-        estuda e não quero te atrapalhar. Mesmo assim, fico esperando alguma
-        sua, porque eu receberia qualquer mensagem sua a qualquer hora, sem
-        limite nenhum. Eu leria tudo, independente do horário, porque você é
-        minha prioridade. Você é o amor da minha vida, a pessoa com quem eu
-        quero estar, viver e construir tudo.
+              <div class="chips"></div>
+            </div>
 
-        <br /><br />
+            <div class="hero-bottom">
+              <div class="hero-line"></div>
+              <span id="footerCopy"
+                >Feito para transformar um vídeo simples em um presente com cara
+                de ocasião.</span
+              >
+            </div>
+          </div>
 
-        Eu sei que você às vezes se sente culpada por “não conseguir retribuir”,
-        mas só o fato de ser você já é a melhor resposta para tudo o que eu
-        faço. Eu não faço minhas declarações esperando que você se obrigue a
-        fazer igual. Pra ser sincero, eu só quero te lembrar a cada instante que
-        você me tem por completo e que eu amo você.
+          <div class="panel">
+            <div class="panel-box">
+              <h2 id="accessTitle">Desbloquear surpresa</h2>
+              <p id="accessDescription">
+                Escreve o horário do primeiro “eu te amo” do jeito que vier na
+                cabeça.
+              </p>
 
-        <br /><br />
+              <div class="field">
+                <label for="passwordInput">Horário</label>
+                <div class="input-wrap">
+                  <input
+                    id="passwordInput"
+                    type="password"
+                    placeholder="Ex.: 23:25"
+                    autocomplete="off"
+                  />
+                  <button
+                    class="peek"
+                    id="togglePassword"
+                    type="button"
+                    aria-label="Mostrar ou ocultar senha"
+                  >
+                    ◉
+                  </button>
+                </div>
+                <div class="hint">
+                  Aceita formatos comuns como 23:25, 23h25, 2325, 11:25 pm e
+                  variações parecidas.
+                </div>
+              </div>
 
-        Sim, eu às vezes fico achando que sou chato por mandar tanta mensagem,
-        mas eu me derreteria por qualquer uma sua, seja uma única palavra ou um
-        texto enorme.
+              <div class="actions">
+                <button id="unlockBtn" class="btn btn-primary" type="button">
+                  Abrir surpresa
+                </button>
+                <button id="clearBtn" class="btn btn-secondary" type="button">
+                  Limpar
+                </button>
+              </div>
 
-        <br /><br />
+              <div class="status-row">
+                <div id="status" class="status">Pronto para desbloquear.</div>
+                <div class="mini-note" id="attemptsLabel">Tentativas: 0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        Minha mãe sempre me disse pra ter bom gosto, procurar uma garota
-        inteligente, guerreira e não olhar só para a beleza. Pra minha sorte,
-        você tem tudo isso e muito mais. Você é a garota que eu sempre sonhei, a
-        que eu amei antes, amo agora e vou amar pra sempre. Minhas palavras
-        podem parecer pequenas, e são mesmo, mas quando estivermos juntos eu vou
-        fazer muito mais.
+      <section id="videoView" class="video-view hidden">
+        <div class="video-shell fade-up">
+          <div class="card topbar">
+            <div>
+              <h3 id="videoTitle">Feliz aniversário, Amanda 💗</h3>
+              <p id="videoDescription">Agora é só dar play.</p>
+            </div>
+            <div class="controls">
+              <button id="relockBtn" class="btn btn-secondary" type="button">
+                Bloquear novamente
+              </button>
+              <button id="fullscreenBtn" class="btn btn-primary" type="button">
+                Tela cheia
+              </button>
+            </div>
+          </div>
 
-        <br /><br />
+          <div class="video-frame">
+            <div class="corner-badge">surpresa liberada</div>
+            <div class="video-overlay"></div>
+            <iframe
+              id="videoPlayer"
+              src="https://www.youtube.com/embed/A8PYanjQEao?si=UGeYoqESFGL0LsuR"
+              title="Vídeo do YouTube"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+                web-share;
+              "
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
 
-        Sinto saudade de você assim que você vai embora. Ainda não senti seu
-        toque, mas já amo ele, já amo o abraço que ainda não tive. Amo sua
-        presença em tudo o que eu faço. Por mim, eu te carregaria comigo para
-        todo lado.
+          <div class="card message-card">
+            <p id="messageText">
+              Um espaço bonito, íntimo e simples para o vídeo principal aparecer
+              como presente.
+            </p>
+            <span class="chip">Feito com carinho</span>
+          </div>
 
-        <br /><br />
+          <div class="footer-note">.</div>
+        </div>
+      </section>
+    </main>
 
-        Você me deixa todo bobo por qualquer coisa, até vendo desenhos da Mari e
-        do Tales eu fico imaginando nós dois ali. E, além de tudo, você é a
-        garota mais linda que eu já vi em toda minha vida. Pode negar o quanto
-        quiser, mas eu admiraria qualquer imagem sua pela eternidade. Quando
-        estivermos juntos, vou tirar momentos só para te olhar e te admirar.
+    <script>
+      const CONFIG = {
+        title:
+          "Feliz aniversário, meu bem, meu amor, minha linda. Feliz aniversário, Amanda.",
+        logoText: "A♥L",
+        eyebrow: "Um presente escondido para uma data especial",
+        heroTitle: "Uma surpresa feita para o seu aniversário.",
+        heroSubtitle:
+          "Antes do vídeo aparecer, tem uma lembrança especial guardando a entrada: o horário do primeiro “eu te amo”.",
+        footerCopy: ".",
+        accessTitle: "Desbloquear surpresa",
+        accessDescription:
+          "Escreve o horário do primeiro “eu te amo” do jeito que vier na cabeça.",
+        unlockedTitle: "Feliz aniversário, Amanda 💗",
+        unlockedDescription: "Agora é só dar play.",
+        messageText:
+          "Um espaço bonito, íntimo e simples para o vídeo principal aparecer como presente.",
+        videoUrl:
+          "https://www.youtube.com/embed/A8PYanjQEao?si=UGeYoqESFGL0LsuR",
+        poster: "",
+        autoPlayOnUnlock: true,
+        rememberForSession: true,
+        maxAttemptsBeforeCooldown: 5,
+        cooldownSeconds: 8,
+      };
 
-        <br /><br />
+      const loginView = document.getElementById("loginView");
+      const videoView = document.getElementById("videoView");
+      const loginCard = document.getElementById("loginCard");
+      const passwordInput = document.getElementById("passwordInput");
+      const unlockBtn = document.getElementById("unlockBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const relockBtn = document.getElementById("relockBtn");
+      const fullscreenBtn = document.getElementById("fullscreenBtn");
+      const togglePassword = document.getElementById("togglePassword");
+      const statusEl = document.getElementById("status");
+      const attemptsLabel = document.getElementById("attemptsLabel");
+      const videoPlayer = document.getElementById("videoPlayer");
 
-        Eu amo seu rosto, seu cabelo, seus olhinhos, sua boca (que eu vou dar
-        umas bitoquinhas), seu belíssimo corpo que eu admiraria como um artista
-        analisando uma musa para sua arte. Eu amo tudo sobre você, tudo mesmo,
-        sem nenhum resquício de falta.
+      let attempts = 0;
+      let cooldownActive = false;
+      let cooldownTimer = null;
 
-        <br /><br />
+      function normalizeText(value) {
+        return value
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .replace(/\s+/g, " ")
+          .trim();
+      }
 
-        Eu facilmente escreveria mais milhões de parágrafos pra descrever 1% do
-        que eu sinto por você. Mas você com certeza não leria tudo, nem sei se
-        vai ler isso, mas sabe como é né? Faço o que posso e o que não posso por
-        você, e não me arrependo de nadica de nada.
+      function parseTimeCandidate(rawValue) {
+        const value = normalizeText(rawValue);
 
-        <br /><br />
+        if (!value) return null;
 
-        Feliz 3 meses, meu bem. Amei você durante cada segundo, e vou continuar
-        a contar cada um deles até poder sentir você de perto, e depois
-        continuar contando cada um deles pra lembrar há quanto tempo eu amo
-        você.
+        const hasPM =
+          /\b(pm|p\.m\.|p m)\b/.test(value) || /da noite|a noite/.test(value);
+        const hasAM =
+          /\b(am|a\.m\.|a m)\b/.test(value) ||
+          /da manha|de manha|manha/.test(value);
+        const digitsOnly = value.replace(/\D/g, "");
+        const hasSeparators = /[:h.,\s-]/.test(value);
 
-        <br /><br />
+        const numbers = value.match(/\d+/g);
+        if (numbers && numbers.length >= 2) {
+          let hours = Number(numbers[0]);
+          const minutes = Number(numbers[1]);
 
-        Obrigado por existir, garota. Você faz meu dia ser incrível só com um
-        “eu te amo” ou simplesmente uma coisinha silly.
+          if (minutes <= 59) {
+            if (hasPM && hours >= 1 && hours <= 11) hours += 12;
+            if (hasAM && hours === 12) hours = 0;
 
-        <br /><br />
+            if (hours <= 23) {
+              return { hours, minutes };
+            }
+          }
+        }
 
-        AMO VOCÊÊÊÊÊÊÊÊÊÊÊÊÊ!!!!!!!!!!!!
+        if (!hasSeparators && /^\d{4}$/.test(digitsOnly)) {
+          let hours = Number(digitsOnly.slice(0, 2));
+          const minutes = Number(digitsOnly.slice(2, 4));
+          if (hasPM && hours >= 1 && hours <= 11) hours += 12;
+          if (hasAM && hours === 12) hours = 0;
+          if (minutes <= 59 && hours <= 23) {
+            return { hours, minutes };
+          }
+        }
 
-        <br /><br /><br />
+        if (!hasSeparators && /^\d{3}$/.test(digitsOnly)) {
+          let hours = Number(digitsOnly.slice(0, 1));
+          const minutes = Number(digitsOnly.slice(1, 3));
+          if (hasPM && hours >= 1 && hours <= 11) hours += 12;
+          if (hasAM && hours === 12) hours = 0;
+          if (minutes <= 59 && hours <= 23) {
+            return { hours, minutes };
+          }
+        }
 
-        <p style="font-size: 4px;">ps: se eu exagerar e vc ficar entediada ou incomodada com algo, me avisa não tenho bola de cristal pra adivinhar q vc não gostou de algo que eu fiz</p>
-      </p>
-    </div>
+        const wordPatterns = [
+          /vinte e tres(?: horas?)?(?: e)? vinte e cinco/,
+          /vinte tres(?: horas?)?(?: e)? vinte e cinco/,
+          /onze(?: horas?)?(?: e)? vinte e cinco(?: da noite| a noite| pm)?/,
+        ];
+
+        if (wordPatterns.some((pattern) => pattern.test(value))) {
+          if (
+            /onze/.test(value) &&
+            !(hasPM || /da noite|a noite/.test(value))
+          ) {
+            return { hours: 11, minutes: 25 };
+          }
+          if (/onze/.test(value)) {
+            return { hours: 23, minutes: 25 };
+          }
+          return { hours: 23, minutes: 25 };
+        }
+
+        return null;
+      }
+
+      function isValidPassword(rawValue) {
+        const parsed = parseTimeCandidate(rawValue);
+        if (!parsed) return false;
+        return parsed.hours === 23 && parsed.minutes === 25;
+      }
+
+      function applyCopy() {
+        document.title = CONFIG.title;
+        document.getElementById("brandName").textContent = CONFIG.title;
+        document.getElementById("logoText").textContent = CONFIG.logoText;
+        document.getElementById("eyebrowText").textContent = CONFIG.eyebrow;
+        document.getElementById("heroTitle").textContent = CONFIG.heroTitle;
+        document.getElementById("heroSubtitle").textContent =
+          CONFIG.heroSubtitle;
+        document.getElementById("footerCopy").textContent = CONFIG.footerCopy;
+        document.getElementById("accessTitle").textContent = CONFIG.accessTitle;
+        document.getElementById("accessDescription").textContent =
+          CONFIG.accessDescription;
+        document.getElementById("videoTitle").textContent =
+          CONFIG.unlockedTitle;
+        document.getElementById("videoDescription").textContent =
+          CONFIG.unlockedDescription;
+        document.getElementById("messageText").textContent = CONFIG.messageText;
+      }
+
+      function setStatus(message, type = "") {
+        statusEl.textContent = message;
+        statusEl.className = `status ${type}`.trim();
+      }
+
+      function updateAttempts() {
+        attemptsLabel.textContent = `Tentativas: ${attempts}`;
+      }
+
+      function applyVideoSource() {
+        videoPlayer.src = CONFIG.videoUrl;
+        if (CONFIG.poster) {
+          videoPlayer.poster = CONFIG.poster;
+        }
+      }
+
+      function unlock() {
+        if (CONFIG.rememberForSession) {
+          sessionStorage.setItem("amanda-birthday-unlocked", "1");
+        }
+
+        loginView.classList.add("hidden");
+        videoView.classList.remove("hidden");
+        setStatus("Surpresa liberada.", "success");
+        applyVideoSource();
+
+        setTimeout(() => {
+          if (CONFIG.autoPlayOnUnlock) {
+            videoPlayer.play().catch(() => {});
+          }
+        }, 160);
+      }
+
+      function relock() {
+        sessionStorage.removeItem("amanda-birthday-unlocked");
+        videoPlayer.pause();
+        videoPlayer.currentTime = 0;
+        videoView.classList.add("hidden");
+        loginView.classList.remove("hidden");
+        passwordInput.value = "";
+        passwordInput.focus();
+        setStatus("Acesso bloqueado novamente.");
+      }
+
+      function startCooldown() {
+        cooldownActive = true;
+        let seconds = CONFIG.cooldownSeconds;
+        unlockBtn.disabled = true;
+        setStatus(`Muitas tentativas. Aguarde ${seconds}s.`, "error");
+
+        cooldownTimer = setInterval(() => {
+          seconds -= 1;
+          if (seconds <= 0) {
+            clearInterval(cooldownTimer);
+            cooldownActive = false;
+            attempts = 0;
+            updateAttempts();
+            unlockBtn.disabled = false;
+            setStatus("Você pode tentar de novo.");
+            return;
+          }
+          setStatus(`Muitas tentativas. Aguarde ${seconds}s.`, "error");
+        }, 1000);
+      }
+
+      function failAttempt() {
+        attempts += 1;
+        updateAttempts();
+        loginCard.classList.remove("shake");
+        void loginCard.offsetWidth;
+        loginCard.classList.add("shake");
+
+        if (attempts >= CONFIG.maxAttemptsBeforeCooldown) {
+          startCooldown();
+        } else {
+          setStatus("Esse formato não bateu. Tenta de outro jeito.", "error");
+        }
+      }
+
+      function verifyAccess() {
+        if (cooldownActive) return;
+
+        if (isValidPassword(passwordInput.value)) {
+          setStatus("Conferindo lembrança...", "success");
+          setTimeout(unlock, 320);
+        } else {
+          failAttempt();
+        }
+      }
+
+      unlockBtn.addEventListener("click", verifyAccess);
+
+      clearBtn.addEventListener("click", () => {
+        passwordInput.value = "";
+        passwordInput.focus();
+        setStatus("Campo limpo.");
+      });
+
+      relockBtn.addEventListener("click", relock);
+
+      fullscreenBtn.addEventListener("click", async () => {
+        const target = document.querySelector(".video-frame");
+        try {
+          if (!document.fullscreenElement) {
+            await target.requestFullscreen();
+          } else {
+            await document.exitFullscreen();
+          }
+        } catch (_) {}
+      });
+
+      togglePassword.addEventListener("click", () => {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+        togglePassword.textContent = isPassword ? "◌" : "◉";
+      });
+
+      passwordInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") verifyAccess();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !videoView.classList.contains("hidden")) {
+          relock();
+        }
+      });
+
+      function boot() {
+        applyCopy();
+        updateAttempts();
+        passwordInput.focus();
+
+        if (
+          CONFIG.rememberForSession &&
+          sessionStorage.getItem("amanda-birthday-unlocked") === "1"
+        ) {
+          unlock();
+        }
+      }
+
+      function initParticles() {
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
+        let w = window.innerWidth;
+        let h = window.innerHeight;
+        let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        const particles = [];
+
+        function resize() {
+          w = window.innerWidth;
+          h = window.innerHeight;
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = Math.floor(w * dpr);
+          canvas.height = Math.floor(h * dpr);
+          canvas.style.width = w + "px";
+          canvas.style.height = h + "px";
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function seed() {
+          particles.length = 0;
+          const count = Math.max(34, Math.floor(w / 42));
+          for (let i = 0; i < count; i++) {
+            particles.push({
+              x: Math.random() * w,
+              y: Math.random() * h,
+              r: Math.random() * 2.1 + 0.8,
+              vx: (Math.random() - 0.5) * 0.18,
+              vy: (Math.random() - 0.5) * 0.18,
+              a: Math.random() * 0.55 + 0.15,
+            });
+          }
+        }
+
+        function drawHeart(x, y, size, alpha) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.scale(size, size);
+          ctx.beginPath();
+          ctx.moveTo(0, 0.3);
+          ctx.bezierCurveTo(0, -0.3, -0.5, -0.5, -0.5, -0.05);
+          ctx.bezierCurveTo(-0.5, 0.28, -0.18, 0.52, 0, 0.7);
+          ctx.bezierCurveTo(0.18, 0.52, 0.5, 0.28, 0.5, -0.05);
+          ctx.bezierCurveTo(0.5, -0.5, 0, -0.3, 0, 0.3);
+          ctx.closePath();
+          ctx.fillStyle = `rgba(255, 170, 210, ${alpha})`;
+          ctx.fill();
+          ctx.restore();
+        }
+
+        function tick() {
+          ctx.clearRect(0, 0, w, h);
+
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < -20) p.x = w + 20;
+            if (p.x > w + 20) p.x = -20;
+            if (p.y < -20) p.y = h + 20;
+            if (p.y > h + 20) p.y = -20;
+
+            if (i % 9 === 0) {
+              drawHeart(p.x, p.y, p.r * 1.8, p.a * 0.8);
+            } else {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(255, 226, 240, ${p.a})`;
+              ctx.fill();
+            }
+
+            for (let j = i + 1; j < particles.length; j++) {
+              const q = particles[j];
+              const dx = p.x - q.x;
+              const dy = p.y - q.y;
+              const dist = Math.hypot(dx, dy);
+
+              if (dist < 120) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(q.x, q.y);
+                ctx.strokeStyle = `rgba(255, 146, 194, ${0.09 * (1 - dist / 120)})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+              }
+            }
+          }
+
+          requestAnimationFrame(tick);
+        }
+
+        resize();
+        seed();
+        window.addEventListener("resize", () => {
+          resize();
+          seed();
+        });
+        tick();
+      }
+
+      boot();
+      initParticles();
+    </script>
   </body>
 </html>
