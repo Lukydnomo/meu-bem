@@ -44,7 +44,7 @@
           system-ui,
           -apple-system,
           BlinkMacSystemFont,
-          'Segoe UI',
+          "Segoe UI",
           sans-serif;
         background:
           radial-gradient(
@@ -552,7 +552,7 @@
       }
 
       .video-frame::before {
-        content: '';
+        content: "";
         position: absolute;
         inset: -20%;
         background:
@@ -798,9 +798,11 @@
             <div class="corner-badge">surpresa liberada</div>
             <div class="video-overlay"></div>
             <iframe
-              id="videoPlayer"
-              src="https://www.youtube.com/embed/A8PYanjQEao?si=UGeYoqESFGL0LsuR"
-              title="Vídeo do YouTube"
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/_UZPrqfitvg?si=gnphO7Bcpw2CQmnl"
+              title="YouTube video player"
+              frameborder="0"
               allow="
                 accelerometer;
                 autoplay;
@@ -831,41 +833,41 @@
     <script>
       const CONFIG = {
         title:
-          'Feliz aniversário, meu bem, meu amor, minha linda. Feliz aniversário, Amanda.',
-        logoText: 'A♥L',
-        eyebrow: 'Um presente escondido para uma data especial',
-        heroTitle: 'Uma surpresa feita para o seu aniversário.',
+          "Feliz aniversário, meu bem, meu amor, minha linda. Feliz aniversário, Amanda.",
+        logoText: "A♥L",
+        eyebrow: "Um presente escondido para uma data especial",
+        heroTitle: "Uma surpresa feita para o seu aniversário.",
         heroSubtitle:
-          'Antes do vídeo aparecer, tem uma lembrança especial guardando a entrada: o horário do primeiro “eu te amo”.',
-        footerCopy: '.',
-        accessTitle: 'Desbloquear surpresa',
+          "Antes do vídeo aparecer, tem uma lembrança especial guardando a entrada: o horário do primeiro “eu te amo”.",
+        footerCopy: ".",
+        accessTitle: "Desbloquear surpresa",
         accessDescription:
-          'Escreve o horário do primeiro “eu te amo” do jeito que vier na cabeça.',
-        unlockedTitle: 'Feliz aniversário, Amanda 💗',
-        unlockedDescription: 'Agora é só dar play.',
+          "Escreve o horário do primeiro “eu te amo” do jeito que vier na cabeça.",
+        unlockedTitle: "Feliz aniversário, Amanda 💗",
+        unlockedDescription: "Agora é só dar play.",
         messageText:
-          'Um espaço bonito, íntimo e simples para o vídeo principal aparecer como presente.',
+          "Um espaço bonito, íntimo e simples para o vídeo principal aparecer como presente.",
         videoUrl:
-          'https://www.youtube.com/embed/A8PYanjQEao?si=UGeYoqESFGL0LsuR',
-        poster: '',
+          "https://www.youtube.com/embed/A8PYanjQEao?si=UGeYoqESFGL0LsuR",
+        poster: "",
         autoPlayOnUnlock: true,
         rememberForSession: true,
         maxAttemptsBeforeCooldown: 5,
         cooldownSeconds: 8,
       };
 
-      const loginView = document.getElementById('loginView');
-      const videoView = document.getElementById('videoView');
-      const loginCard = document.getElementById('loginCard');
-      const passwordInput = document.getElementById('passwordInput');
-      const unlockBtn = document.getElementById('unlockBtn');
-      const clearBtn = document.getElementById('clearBtn');
-      const relockBtn = document.getElementById('relockBtn');
-      const fullscreenBtn = document.getElementById('fullscreenBtn');
-      const togglePassword = document.getElementById('togglePassword');
-      const statusEl = document.getElementById('status');
-      const attemptsLabel = document.getElementById('attemptsLabel');
-      const videoPlayer = document.getElementById('videoPlayer');
+      const loginView = document.getElementById("loginView");
+      const videoView = document.getElementById("videoView");
+      const loginCard = document.getElementById("loginCard");
+      const passwordInput = document.getElementById("passwordInput");
+      const unlockBtn = document.getElementById("unlockBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const relockBtn = document.getElementById("relockBtn");
+      const fullscreenBtn = document.getElementById("fullscreenBtn");
+      const togglePassword = document.getElementById("togglePassword");
+      const statusEl = document.getElementById("status");
+      const attemptsLabel = document.getElementById("attemptsLabel");
+      const videoPlayer = document.getElementById("videoPlayer");
 
       let attempts = 0;
       let cooldownActive = false;
@@ -873,10 +875,10 @@
 
       function normalizeText(value) {
         return value
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
           .toLowerCase()
-          .replace(/\s+/g, ' ')
+          .replace(/\s+/g, " ")
           .trim();
       }
 
@@ -890,7 +892,7 @@
         const hasAM =
           /\b(am|a\.m\.|a m)\b/.test(value) ||
           /da manha|de manha|manha/.test(value);
-        const digitsOnly = value.replace(/\D/g, '');
+        const digitsOnly = value.replace(/\D/g, "");
         const hasSeparators = /[:h.,\s-]/.test(value);
 
         const numbers = value.match(/\d+/g);
@@ -958,24 +960,24 @@
 
       function applyCopy() {
         document.title = CONFIG.title;
-        document.getElementById('brandName').textContent = CONFIG.title;
-        document.getElementById('logoText').textContent = CONFIG.logoText;
-        document.getElementById('eyebrowText').textContent = CONFIG.eyebrow;
-        document.getElementById('heroTitle').textContent = CONFIG.heroTitle;
-        document.getElementById('heroSubtitle').textContent =
+        document.getElementById("brandName").textContent = CONFIG.title;
+        document.getElementById("logoText").textContent = CONFIG.logoText;
+        document.getElementById("eyebrowText").textContent = CONFIG.eyebrow;
+        document.getElementById("heroTitle").textContent = CONFIG.heroTitle;
+        document.getElementById("heroSubtitle").textContent =
           CONFIG.heroSubtitle;
-        document.getElementById('footerCopy').textContent = CONFIG.footerCopy;
-        document.getElementById('accessTitle').textContent = CONFIG.accessTitle;
-        document.getElementById('accessDescription').textContent =
+        document.getElementById("footerCopy").textContent = CONFIG.footerCopy;
+        document.getElementById("accessTitle").textContent = CONFIG.accessTitle;
+        document.getElementById("accessDescription").textContent =
           CONFIG.accessDescription;
-        document.getElementById('videoTitle').textContent =
+        document.getElementById("videoTitle").textContent =
           CONFIG.unlockedTitle;
-        document.getElementById('videoDescription').textContent =
+        document.getElementById("videoDescription").textContent =
           CONFIG.unlockedDescription;
-        document.getElementById('messageText').textContent = CONFIG.messageText;
+        document.getElementById("messageText").textContent = CONFIG.messageText;
       }
 
-      function setStatus(message, type = '') {
+      function setStatus(message, type = "") {
         statusEl.textContent = message;
         statusEl.className = `status ${type}`.trim();
       }
@@ -993,12 +995,12 @@
 
       function unlock() {
         if (CONFIG.rememberForSession) {
-          sessionStorage.setItem('amanda-birthday-unlocked', '1');
+          sessionStorage.setItem("amanda-birthday-unlocked", "1");
         }
 
-        loginView.classList.add('hidden');
-        videoView.classList.remove('hidden');
-        setStatus('Surpresa liberada.', 'success');
+        loginView.classList.add("hidden");
+        videoView.classList.remove("hidden");
+        setStatus("Surpresa liberada.", "success");
         applyVideoSource();
 
         setTimeout(() => {
@@ -1009,21 +1011,21 @@
       }
 
       function relock() {
-        sessionStorage.removeItem('amanda-birthday-unlocked');
+        sessionStorage.removeItem("amanda-birthday-unlocked");
         videoPlayer.pause();
         videoPlayer.currentTime = 0;
-        videoView.classList.add('hidden');
-        loginView.classList.remove('hidden');
-        passwordInput.value = '';
+        videoView.classList.add("hidden");
+        loginView.classList.remove("hidden");
+        passwordInput.value = "";
         passwordInput.focus();
-        setStatus('Acesso bloqueado novamente.');
+        setStatus("Acesso bloqueado novamente.");
       }
 
       function startCooldown() {
         cooldownActive = true;
         let seconds = CONFIG.cooldownSeconds;
         unlockBtn.disabled = true;
-        setStatus(`Muitas tentativas. Aguarde ${seconds}s.`, 'error');
+        setStatus(`Muitas tentativas. Aguarde ${seconds}s.`, "error");
 
         cooldownTimer = setInterval(() => {
           seconds -= 1;
@@ -1033,24 +1035,24 @@
             attempts = 0;
             updateAttempts();
             unlockBtn.disabled = false;
-            setStatus('Você pode tentar de novo.');
+            setStatus("Você pode tentar de novo.");
             return;
           }
-          setStatus(`Muitas tentativas. Aguarde ${seconds}s.`, 'error');
+          setStatus(`Muitas tentativas. Aguarde ${seconds}s.`, "error");
         }, 1000);
       }
 
       function failAttempt() {
         attempts += 1;
         updateAttempts();
-        loginCard.classList.remove('shake');
+        loginCard.classList.remove("shake");
         void loginCard.offsetWidth;
-        loginCard.classList.add('shake');
+        loginCard.classList.add("shake");
 
         if (attempts >= CONFIG.maxAttemptsBeforeCooldown) {
           startCooldown();
         } else {
-          setStatus('Esse formato não bateu. Tenta de outro jeito.', 'error');
+          setStatus("Esse formato não bateu. Tenta de outro jeito.", "error");
         }
       }
 
@@ -1058,25 +1060,25 @@
         if (cooldownActive) return;
 
         if (isValidPassword(passwordInput.value)) {
-          setStatus('Conferindo lembrança...', 'success');
+          setStatus("Conferindo lembrança...", "success");
           setTimeout(unlock, 320);
         } else {
           failAttempt();
         }
       }
 
-      unlockBtn.addEventListener('click', verifyAccess);
+      unlockBtn.addEventListener("click", verifyAccess);
 
-      clearBtn.addEventListener('click', () => {
-        passwordInput.value = '';
+      clearBtn.addEventListener("click", () => {
+        passwordInput.value = "";
         passwordInput.focus();
-        setStatus('Campo limpo.');
+        setStatus("Campo limpo.");
       });
 
-      relockBtn.addEventListener('click', relock);
+      relockBtn.addEventListener("click", relock);
 
-      fullscreenBtn.addEventListener('click', async () => {
-        const target = document.querySelector('.video-frame');
+      fullscreenBtn.addEventListener("click", async () => {
+        const target = document.querySelector(".video-frame");
         try {
           if (!document.fullscreenElement) {
             await target.requestFullscreen();
@@ -1086,18 +1088,18 @@
         } catch (_) {}
       });
 
-      togglePassword.addEventListener('click', () => {
-        const isPassword = passwordInput.type === 'password';
-        passwordInput.type = isPassword ? 'text' : 'password';
-        togglePassword.textContent = isPassword ? '◌' : '◉';
+      togglePassword.addEventListener("click", () => {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+        togglePassword.textContent = isPassword ? "◌" : "◉";
       });
 
-      passwordInput.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') verifyAccess();
+      passwordInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") verifyAccess();
       });
 
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && !videoView.classList.contains('hidden')) {
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !videoView.classList.contains("hidden")) {
           relock();
         }
       });
@@ -1109,15 +1111,15 @@
 
         if (
           CONFIG.rememberForSession &&
-          sessionStorage.getItem('amanda-birthday-unlocked') === '1'
+          sessionStorage.getItem("amanda-birthday-unlocked") === "1"
         ) {
           unlock();
         }
       }
 
       function initParticles() {
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
         let w = window.innerWidth;
         let h = window.innerHeight;
         let dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1130,8 +1132,8 @@
           dpr = Math.min(window.devicePixelRatio || 1, 2);
           canvas.width = Math.floor(w * dpr);
           canvas.height = Math.floor(h * dpr);
-          canvas.style.width = w + 'px';
-          canvas.style.height = h + 'px';
+          canvas.style.width = w + "px";
+          canvas.style.height = h + "px";
           ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
 
@@ -1210,7 +1212,7 @@
 
         resize();
         seed();
-        window.addEventListener('resize', () => {
+        window.addEventListener("resize", () => {
           resize();
           seed();
         });
